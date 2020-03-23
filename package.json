@@ -1,0 +1,15 @@
+{
+  "name": "forum-scripts",
+  "version": "1.0.0",
+  "description": "some scripts for nypt forums",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ajycc20 <ajycc20@qq.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dayjs": "^1.8.23",
+    "superagent": "^5.2.2"
+  }
+}
