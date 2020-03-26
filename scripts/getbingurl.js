@@ -3,7 +3,6 @@ const dayjs = require('dayjs') // 引入dayjs
 
 let cookie = '' // 这里填写NY的cookie
 let bingApiUrl = 'https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1' // Bing 官方api
-let date = '' // 每天时间 eg. 2020-03-16
 
 let bodyText = ''
 
@@ -16,13 +15,10 @@ function setBodyText() {
   .get(bingApiUrl)
   .then(res => {
     let bingJson = eval('(' + res.text + ')')
-    let bingUrl = 'cn.bing.com' + bingJson.images[0].url
+    let bingUrl = `cn.bing.com${bingJson.images[0].url}`
     let copyright = bingJson.images[0].copyright
 
-    date = dayjs().format('YYYY-MM-DD')
-
-    let textBing = '[size=4][color=DarkOrange]' + date + '，今天的bing背景Url是[/color][/size][quote=' + copyright + ']' + bingUrl + '[/quote]'
-    bodyText = textBing + '[img]https://' + bingUrl + '[/img]'
+    bodyText = `[quote=${copyright}]${bingUrl}[/quote][img]https://${bingUrl}[/img]`
   })
 }
 

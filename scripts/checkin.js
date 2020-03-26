@@ -7,6 +7,7 @@ let date = '' // 签到帖标题 时间 全局变量
 
 let title = '' // 签到帖标题 全局变量
 let bodyText = '' // 签到帖正文 全局变量
+let jsonTitle = '' // 一言部分 填入主体
 
 
 /**
@@ -20,7 +21,8 @@ function setTitle() {
     let json = eval('(' + res.text + ')') // json对象化
 
     // 鉴于论坛要求每周五标题固定做的判断
-    title = (dayjs().day() === 5) ? '[每周五固定主题 ' + date + '] 本周最开心的事情是什么？' : ('[每日签到 ' + date + '] ' + json.hitokoto)
+    title = (dayjs().day() === 5) ? `[每周五固定主题 ${date}] 本周最开心的事情是什么？` : `[每日签到 ${date}] ${json.hitokoto}`
+    jsonTitle = (dayjs().day() === 5) ? '' : `[quote]今日标题来自：《${json.from}》[/quote]`
   })
 }
 /**
@@ -32,12 +34,11 @@ function setBodyText() {
   .get(bingApiUrl)
   .then(res => {
     let bingJson = eval('(' + res.text + ')')
-    let bingUrl = 'cn.bing.com' + bingJson.images[0].url // 构造完整的必应壁纸url
+    let bingUrl = `cn.bing.com${bingJson.images[0].url}` // 构造完整的必应壁纸url
     let copyright = bingJson.images[0].copyright // 获取到copyright参数
 
     // 拼接帖子主体信息
-    let textBing = '[size=4][color=DarkOrange]' + date + '，今天的bing背景Url是[/color][/size][quote=' + copyright + ']' + bingUrl + '[/quote]'
-    bodyText = textBing + '[img]https://' + bingUrl + '[/img]'
+    bodyText = `[quote=${copyright}]今日必应壁纸url：${bingUrl}[/quote][img]https://${bingUrl}[/img]`
   })
 }
 
@@ -89,6 +90,8 @@ var running = function() {
         console.log('--------------------------开始执行发帖--------------------------')
         console.log(title)
         console.log(bodyText)
+        console.log(jsonTitle)
+        bodyText = jsonTitle + bodyText // 在这里将一言from和必应quote合并
 
         newPost(title, bodyText)
         .then(res => {
