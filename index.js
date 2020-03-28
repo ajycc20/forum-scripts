@@ -1,6 +1,7 @@
 var checkinFunc = require('./scripts/checkin')
 var givebounsFunc = require('./scripts/givebonus')
 var getbingurlFunc = require('./scripts/getbingurl')
+var highlightFunc = require('./scripts/highlight')
 
 setInterval(() => {
   // 获取时分秒
@@ -10,6 +11,9 @@ setInterval(() => {
 
   if (tHours == 6 && tMins == 0 && tSecs == 0) {
     checkinFunc()
+  }
+  if (tHours == 7 && tMins == 0 && tSecs == 0) {
+    highlightFunc()
   }
   if (tHours == 12 && tMins == 0 && tSecs == 0) {
     getbingurlFunc()
