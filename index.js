@@ -1,7 +1,7 @@
-var checkinFunc = require('./scripts/checkin')
-var givebounsFunc = require('./scripts/givebonus')
-var getbingurlFunc = require('./scripts/getbingurl')
-var highlightFunc = require('./scripts/highlight')
+var checkinFunc = require('./autoscripts/checkin')
+var givebounsFunc = require('./autoscripts/givebonus')
+var getbingurlFunc = require('./autoscripts/getbingurl')
+var highlightFunc = require('./autoscripts/highlight')
 
 setInterval(() => {
   // 获取时分秒
