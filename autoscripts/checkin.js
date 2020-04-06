@@ -16,7 +16,7 @@ let jsonTitle = '' // 一言部分 填入主体
  */
 function setTitle() {
   return superagent
-  .get('https://v1.hitokoto.cn/') // 一言api
+  .get('https://v1.hitokoto.cn/?c=a&c=b&c=c&c=d&c=h&c=j&c=k') // 一言api
   .then(res => {
     let json = eval('(' + res.text + ')') // json对象化
 
